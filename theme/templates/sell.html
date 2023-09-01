@@ -1,0 +1,87 @@
+{% load static tailwind_tags %}
+{% load static %}
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {% tailwind_css %} 
+    </head>
+    <body class ='bg-no-repeat bg-cover bg-center bg-fixed ' style="background-image: url('{% static 'pexels-home.jpg' %}')">
+        <header class="backdrop-blur bg-green/10 text-gray-600 body-font shadow-lg">
+            <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+              <a class="flex title-font font-medium items-center text-gray-900 mb-4  md:mb-0" href="/">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class=" w-10 h-10 text-white p-2 bg-indigo-500 rounded-full " viewBox="0 0 24 24">
+                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+                </svg>
+                <span class="mx-auto text-xl font-bold md:ml-3">Project</span>
+              </a>
+              
+            </div>
+          </header>
+          <h3 class='text-xl font-semibold'>Hi ! {{user.first_name}}</h3>
+          <a class="mx-2 inline-block px-6 py-2.5 bg-red-300 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-green-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-700 active:shadow-lg transition duration-150 ease-in-out" href="addproduct">
+            Add Product
+          </a>
+          
+          <!--products on sale -->
+          <div class = 'grid grid-cols-3 gap-4'>
+            <div class = 'col-span-1'>
+                <h1 class='text-2xl font-bold uppercase'> products on sale </h1>
+              
+                {% for product in products %}
+                
+                  <div class='mx-4 mt-2 bg-white'>
+                    <p class='px-4 text-2xl font-bold uppercase'>{{product.product_name}}<br>
+                      {% for key,value in quantity.items %}
+                      {% if key == product.product_name %}
+                      <p class="px-2 text-black  text-lg font-bold uppercase mb-4">
+                        Available quantity: {{value}} kilos
+                      </p>
+                      
+                      {% endif %}
+                      {% endfor %}<br>
+                      <a class='text-red-800 text-2xl font-bold uppercase'
+                        href=""
+                      >
+                      orders placed {{product.product_id}}
+                      </a>
+                      
+
+                  </div>
+                    
+                
+                {% endfor  %}
+              </div>  
+              <div class = 'col-span-2'>
+                
+              </div>
+          </div>
+          <h1>hello</h1>
+
+          {% for order in orders %}
+            <p>this is inside for loop </p>
+            {% for m,val in mobiles.items %}
+            <p>{{order.user.first_name}}</p>
+              {% if m == order.user%}
+                <p>{{val}}</p>
+              {% endif %}
+            {% endfor %}
+            <p>{{order.quantity}}</p>
+          {% endfor %}
+         
+      <script>
+        function toggleTable(product) {
+          var table = document.getElementById(product);
+          if (table.style.display === "none") {
+            table.style.display = "block";
+          } else {
+            table.style.display = "none";
+          }
+          
+        }
+            
+
+      </script>
+          
+    </body>
+</html>

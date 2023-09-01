@@ -1,0 +1,429 @@
+{% load static tailwind_tags %}
+{% load static %}
+{% load i18n %}
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+        {% tailwind_css %} 
+        
+    </head>
+    <body class ='bg-no-repeat bg-cover bg-center bg-fixed bg-white' >
+      {% get_current_language as LANGUAGE_CODE %}
+      {% get_available_languages as Languages %}
+      {% get_language_info_list for Languages as langs %}
+      <nav class=" bg-white shadow-lg">
+        <div class="max-w-6xl mx-auto px-4">
+          <div class="flex justify-between">
+            <div class="flex space-x-7">
+              <div>
+                <!-- Website Logo -->
+                <a href="/{{LANGUAGE_CODE}}" class="flex  mr-4 items-center py-4 px-2">
+                  <img src={% static 'logo.jpg'%} alt="Logo" class="h-8 w-8 mr-2">
+                  <span class="font-bold uppercase text-black text-xl">{% translate 'veggy' %}</span>
+                </a>
+              </div>
+              <!-- Primary Navbar items -->
+              <div class="hidden md:flex items-center space-x-1">
+                {%if type == 'products'%}
+                <a href="/{{LANGUAGE_CODE}}" class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">{%translate 'Home' %}</a>
+                <a href="/{{LANGUAGE_CODE}}/sell/products/" class="py-4 px-2 text-green-500 border-b-4 border-green-500 font-semibold ">{%translate 'Products' %}</a>
+                <a href="/{{LANGUAGE_CODE}}/sell/orders/" class="py-4 px-2 text-gray-500 capitalize font-semibold hover:text-green-500 transition duration-300">{%translate 'orders' %}</a>
+                {%else%}
+
+                <a href="/{{LANGUAGE_CODE}}" class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">{%translate 'Home' %}</a>
+                <a href="/{{LANGUAGE_CODE}}/sell/products/" class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300 ">{%translate 'Products' %}</a>
+                <a href="/{{LANGUAGE_CODE}}/sell/orders/" class="py-4 px-2 text-green-500 capitalize border-b-4 border-green-500 font-semibold">{%translate ' orders' %}</a>
+                {%endif%}
+              </div>
+            </div>
+            <!-- Secondary Navbar items -->
+            <div class="hidden md:flex items-center space-x-3 ">
+              {%if user.is_authenticated %}
+              <h1 class=' text-gray-500 font-semibold capitalize'>hi! {{request.user.first_name}}</h1>
+              <a href="/{{LANGUAGE_CODE}}/profile/" class="py-2 px-2 font-medium text-black rounded hover:bg-green-500 hover:text-black transition duration-300">{%translate 'Profile' %}</a>
+              <a href="/{{LANGUAGE_CODE}}/sell/addproduct/" class="py-2 px-2 font-medium text-white bg-green-500 rounded hover:bg-green-400 transition duration-300">{%translate 'Add Product' %}</a>
+              
+              {%endif%}
+              {% for lang in langs%}
+              {% if LANGUAGE_CODE == lang.code %}
+              <a class="border-b-4 border-green-500" href="/{{lang.code}}/sell/" >{{lang.name_local}}</a>
+              {%else%}
+              <a class="" href="/{{lang.code}}/sell" >{{lang.name_local}}</a>
+              {%endif%}
+              {% endfor %}
+            </div>
+            <!-- Mobile menu button -->
+            <div class="md:hidden flex items-center">
+              {% for lang in langs%}
+              {% if LANGUAGE_CODE == lang.code %}
+              <a class="mx-1 px-2 py-1 rounded-lg bg-green-500 text-white" href="/{{lang.code}}/sell/" >{% translate lang.name_local %}</a>
+              {%else%}
+              <a class="mx-2" href="/{{lang.code}}/sell/" >{% translate lang.name_local %}</a>
+              {%endif%}
+              {% endfor %}
+              <button class="outline-none mobile-menu-button">
+              <svg class=" w-6 h-6 text-gray-500 hover:text-green-500 "
+                x-show="!showMenu"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path d="M4 6h16M4 12h16M4 18h16"></path>
+              </svg>
+            </button>
+            </div>
+          </div>
+        </div>
+        <!-- mobile menu -->
+        <div class="hidden mobile-menu">
+          <ul class="">
+            {% if user.is_authenticated%}
+            <h1 class=' text-gray-500 font-semibold capitalize'>hi! {{request.user.first_name}}</h1>
+            {%endif%}
+            <li class="active"><a href="/{{LANGUAGE_CODE}}" class="block text-sm px-2 py-4 text-white bg-green-500 font-semibold">{%translate 'Home' %}</a></li>
+            <li><a href="/{{LANGUAGE_CODE}}/sell/products/" class="block text-sm px-2 py-4 hover:bg-green-500 transition duration-300">{%translate 'Products' %}</a></li>
+            <li><a href="/{{LANGUAGE_CODE}}/sell/orders/" class="block text-sm px-2 py-4 capitalize hover:bg-green-500 transition duration-300">{%translate 'orders' %}</a></li>
+            
+            {%if user.is_authenticated %}
+              <li><a href="/{{LANGUAGE_CODE}}/profile/" class="block text-sm px-2 py-4 hover:bg-green-500 transition duration-300">{%translate 'Profile' %}</a></li>
+              
+              {%endif%}
+          </ul>
+        </div>
+        <script>
+          const btn = document.querySelector("button.mobile-menu-button");
+          const menu = document.querySelector(".mobile-menu");
+    
+          btn.addEventListener("click", () => {
+            menu.classList.toggle("hidden");
+          });
+        </script>
+      </nav>
+
+      <div class="md:hidden flex items-left">
+        <a href="/{{LANGUAGE_CODE}}/sell/addproduct/" class=" mobile-filter-button mt-2 mx-2 py-2 px-4 text-lg capitalize font-medium text-white bg-green-500 rounded hover:bg-green-400 transition duration-300"> 
+          {%translate 'Add Product'%}
+          
+      </a>
+      </div>
+
+      <div class="bg-slate-100 rounded-lg mt-4 container mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="px-4 py-4 col-span-1 sm:col-span-1 lg:col-span-2">
+            <h1 class='capitalize text-3xl font-bold text-gray-900 mb-4'> {% translate type %} </h1> 
+            
+          <!--table-->
+          
+              <div class="overflow-auto rounded-lg shadow-lg hidden md:block">
+
+                <table class="w-full">
+                  <thead class="bg-gray-50 border-b-2 border-gray-200">
+                  <tr>
+                    {%if type == 'products' %}
+                    {% if products %}
+                      <th class="w-20 p-3 text-sm font-semibold tracking-wide text-left">{% translate 'Product Name' %}</th>
+                      <th class="w-20 p-3 text-sm font-semibold tracking-wide text-left">{% translate 'Available Quantity'%}</th>
+                      <th class="w-24 p-3 text-sm font-semibold tracking-wide text-left">{% translate 'Price' %}</th>
+                      <th class="w-24 p-3 text-sm font-semibold tracking-wide text-left">{% translate 'Date' %}</th>
+                      <th class="w-24 p-3 text-sm font-semibold tracking-wide text-left">{% translate 'Action' %}</th>
+                      
+                      {%else%}
+                          <h1 class='ml-2 text-md font-bold text-gray-900 mb-4'>{% translate "You haven't started selling." %}</h1>
+                          <a class='ml-2 my-2 text-lg font-bold text-blue-600 mb-4' href="/sell/addproduct/">{%translate "Add Product" %}</h1>
+                      {%endif%}
+                    {%else%}
+                      {% if orders %}
+                      <th class="w-20 p-3 text-sm font-semibold tracking-wide text-left">{% translate 'Ordered Person'%}</th>
+                      <th class="w-20 p-3 text-sm capitalize font-semibold tracking-wide text-left">{% translate 'product' %}</th>
+                      <th class="w-24 p-3 text-sm font-semibold tracking-wide text-left">{% translate 'Quantity' %}</th>
+                      <th class="w-24 p-3 text-sm font-semibold tracking-wide text-left">{% translate 'Date' %}</th>
+                      <th class="w-20 p-3 text-sm font-semibold tracking-wide text-left">{% translate 'Mobile' %}</th>
+                      <th class="w-20 p-3 text-sm font-semibold tracking-wide text-left">{% translate 'Total price' %}</th>
+                      <th class="w-20 p-3 text-sm font-semibold tracking-wide text-left">{% translate 'Status' %}</th>
+                      <th class="w-24 p-3 text-sm font-semibold tracking-wide text-left">{% translate 'Action' %}</th>
+                      {%else%}
+                      <h1 class='text-lg font-bold text-gray-900 mb-4'>{% translate 'You have no orders for now' %}.</h1>
+                                        
+                      
+                      {%endif%}
+                
+                    {%endif%}
+                  </tr>
+                  </thead>
+                  <tbody class="divide-y divide-gray-100">
+                  {%if type == 'orders'%}
+                  {% for order in orders %}
+                  <tr class="bg-white">
+                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
+                        {{order.user.first_name}}
+                    </td>
+                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap">{% translate order.product_id.product_name %}</td>
+                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap">{{order.quantity}} kg</td>
+                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap">{{order.date.date}}</td>
+                    {%for key,value in mobile.items%}
+                    {%if order.user == key %}
+                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap">{{value}}</td>
+                    {%endif%}
+                    {%endfor%}
+                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap">₹ {{order.price}}</td>
+                    {% for key, value in status.items%}
+                    {%if key == order.order_id%}
+                      <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
+                      <a href="/sell/order/{{order.order_id}}/{{order.status}}/">
+                      <span
+                        class="p-1.5 text-xs font-medium uppercase tracking-wider text-green-800 bg-green-200 rounded-lg bg-opacity-50">{% translate value %}</span>
+                      </a>
+                      </td>
+                    {%endif%}
+                    {%endfor%}
+                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
+                      <a href="/sell/order/{{order.order_id}}/cancel/">
+                      <span
+                        class="p-1.5 text-xs font-medium uppercase tracking-wider text-red-800 bg-red-200 rounded-lg bg-opacity-50">{% translate 'Cancel' %}</span>
+                    </a>
+                    </td>
+                    
+                  </tr>
+                {%endfor%}
+                {%endif %}
+                {% if type == 'products'%}
+                  {%for product in products%}
+                    <tr class="bg-white">
+                      <td class="p-3 text-sm text-gray-700 whitespace-nowrap">{% translate product.product_name %}</td>
+                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap">{{product.total_quantity}} kg</td>
+                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap">₹ {{product.price}}</td>
+                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap">{{product.date.date}}</td>
+                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
+                      <a href="/sell/product/remove/{{product.product_id}}">
+                        <span
+                          class="p-1.5 text-xs font-medium uppercase tracking-wider text-red-800 bg-red-200 rounded-lg bg-opacity-50">{% translate 'Remove' %}</span>
+                      </a>
+                    </td>
+                    
+                    </tr>
+                
+                  {%endfor%}
+                {%endif%}
+                  </tbody>
+                </table>
+
+                
+                </div>
+                
+              
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:hidden">
+              {%if type == 'orders'%}
+              {%if orders %}
+              {% for order in orders %}
+              <div class="bg-white space-y-3 p-4 rounded-lg shadow">
+                <div class="flex items-center space-x-2 text-sm">
+                  <div class='text-xl font-bold text-black capitalize'>
+                    {% translate order.product_id.product_name %}
+                  </div>
+                  <div class="text-xl text-gray-500">{{order.quantity}} kg</div>
+                  
+                </div>
+                <div class="flex items-center space-x-2 text-sm">
+                  <div class='text-lg font-medium text-black capitalize'>
+                    {{order.user.first_name}}
+                  </div>
+                  {%for key,value in mobile.items%}
+                  {%if key == order.user%}
+
+                  <div class='text-sm font-medium text-gray-800 capitalize'>
+                   {% translate 'Mobile' %} : {{value}}
+                  </div>
+                  {%endif%}
+                  {%endfor%}
+                </div>
+                <div class="text-sm font-medium text-black">
+                  ₹ {{order.price}}
+                </div>
+                <div class="flex items-center space-x-2 text-sm">
+                  <div>
+                    <a href="/sell/order/{{order.order_id}}/{{order.status}}/">
+                      
+                    <span
+                      class="p-1.5 text-xs font-medium uppercase tracking-wider text-green-800 bg-green-200 rounded-lg bg-opacity-50">{{order.status}}</span>
+                    </a>
+                  </div>
+                  <div>
+                    <a href='/sell/order/{{order.order_id}}/cancel/'
+                    <span
+                      class="p-1.5 text-xs font-medium uppercase tracking-wider text-red-800 bg-red-200 rounded-lg bg-opacity-50">{% translate 'Cancel'%}</span>
+                    </a>
+                  </div>
+              </div>
+
+              </div>
+              {%endfor%}
+              {%else%}
+              <h1 class='text-lg font-bold text-gray-900 mb-4'>{% translate 'You have no orders for now' %}.</h1>
+              {%endif%}
+              {%endif%}
+              {%if type == 'products'%}
+                {%if products %}
+                {%for product in products %}
+                  <div class="bg-white space-y-3 p-4 rounded-lg shadow-lg">
+                    <div class="flex items-center space-x-2 text-sm">
+                      <div class='text-lg font-medium text-black capitalize'>
+                        {% translate product.product_name%}
+                      </div>
+                      <div class="text-gray-500">{{product.total_quantity}} kg {% translate 'Available'%}</div>
+                      <div class='ml-6'>
+                        <a href="/sell/product/remove/{{product.product_id}}">
+                        <span
+                          class="p-1.5 text-xs font-medium uppercase tracking-wider text-red-800 bg-red-200 rounded-lg bg-opacity-50">{% translate 'Remove'%}</span>
+                        </a>
+                      </div>
+                      
+                    </div>
+                    
+                    
+                    
+                    <div class="text-sm font-medium text-black">
+                      ₹ {{product.price}}
+                    </div>
+                    
+                    <div class="flex items-center space-x-2 text-sm">
+                      <form method='post' action="/sell/product/price_change/{{product.product_id}}">
+                        {% csrf_token %}
+                        <input type='number' class='form-control block
+                        w-1/2
+                        px-3
+                        py-1.5
+                        text-base
+                        font-normal
+                        text-gray-700
+                        bg-white bg-clip-padding
+                        border border-solid border-green-600
+                        rounded
+                        transition
+                        ease-in-out
+                        m-0
+                        focus:text-gray-700 focus:bg-white focus:border-green-500 focus:outline-none
+                        'placeholder="{% translate 'new price'%}" name='price' >
+                      <div>
+                        <input type='submit' class="mt-1 p-1.5 text-sm font-medium uppercase tracking-wider text-blue-800 bg-blue-200 rounded-lg bg-opacity-50"
+                        value="{%translate 'change price'%}">
+
+                        
+                      </div>
+
+                      {%for msg in messages%}
+                        <p>{{msg}}</p>
+                      {%endfor%}
+
+                    </form>
+                    </div>
+                  </div>
+              
+                {%endfor%}
+                {%else%}
+                <h1 class='ml-2 text-md font-bold text-gray-900 mb-4'>{% translate "You haven't started selling." %}</h1>
+                <a class='ml-2 my-2 text-lg font-bold text-blue-600 mb-4' href="/sell/addproduct/">{%translate "Add Product" %}</h1>
+                {%endif%}
+              {%endif%}
+              
+              </div>
+              </div>
+            <div class="hidden md:block">
+                <div class="px-4 py-4 col-span-1 sm:col-span-1 lg:col-span-2">
+                  {%if type == 'products'%}
+                    <h3 class='capitalize text-3xl font-bold text-gray-900 mb-4'>{% translate 'Price change' %}</h3>
+                    <form method = 'post' action='/sell/product/price_change'>
+                      {%csrf_token%}
+                      
+                      <div class="mb-3 xl:w-96">
+                        <select name='product' class="form-select appearance-none
+                          block
+                          w-full
+                          px-3
+                          py-1.5
+                          text-base
+                          font-normal
+                          text-gray-700
+                          bg-white bg-clip-padding bg-no-repeat
+                          border border-solid border-green-500
+                          rounded
+                          transition
+                          ease-in-out
+                          m-0
+                          focus:text-gray-700 focus:bg-white focus:border-green-500 focus:outline-none">
+                            <option selected>{% translate 'select product' %}</option>
+                            {%for product in products%}
+                            <option value={{product.product_id}}>{{product.product_name}}</option>
+                            {%endfor%}
+                        </select>
+                      </div>
+                      <input type='number' class='form-control block
+                        w-1/2
+                        px-3
+                        py-1.5
+                        text-base
+                        font-normal
+                        text-gray-700
+                        bg-white bg-clip-padding
+                        border border-solid border-green-500
+                        rounded
+                        transition
+                        ease-in-out
+                        m-0
+                        focus:text-gray-700 focus:bg-white focus:border-green-500 focus:outline-none
+                        'placeholder="{% translate 'New Price'%}" name='price' >
+                        <input class='inline-block px-6 py-2.5 mt-3 bg-green-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-green-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-700 active:shadow-lg transition duration-150 ease-in-out' type='submit' value ="{% translate 'change price'%}">
+                    </form>
+                {%endif%}
+              </div>
+            </div>
+      </div>
+      <!--market price-->
+      {%if type == 'products' and products %}
+      <div class="bg-slate-100 rounded-lg mt-4 container mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="px-4 py-4 col-span-1 sm:col-span-1 lg:col-span-2">
+      
+          <h1 class='text-3xl font-bold text-gray-900 mb-4'>{% translate 'Market Price' %}</h1>
+          <div class="overflow-auto rounded-lg shadow ">
+            <table class="w-full ">
+              <thead class="bg-gray-50 border-b-2 border-gray-200">
+                <tr>
+                
+                  <th class="w-20 p-3 text-sm font-semibold  capitalize tracking-wide text-left">{% translate 'product' %}</th>
+                  <th class="w-20 p-3 text-sm font-semibold tracking-wide text-left">{% translate 'Market Price(per kg)'%} </th>
+                  <th class="w-20 p-3 text-sm font-semibold tracking-wide text-left">{% translate 'Retail Price(per kg)'%}</th>
+                  
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-100">            
+                {% for product in products %}
+                <tr class="bg-white"> 
+                  {% for key,val in m_price.items %}
+                    {% if key == product.product_name %}
+                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap">{% translate key %}</td>
+                    {% for k, v in val.items %}
+                      {% if k == 'Market Price'%}
+                        <td class="p-3 text-sm text-gray-700 whitespace-nowrap">{{v}}</td>
+                      {% endif %}
+                      {% if k == 'Retail Price'%}
+                        <td class="p-3 text-sm text-gray-700 whitespace-nowrap">{{v}}</td>
+                      {% endif %}
+                    {% endfor %}
+                    {% endif %}
+                  {% endfor %}
+                </tr>
+                {% endfor %}
+            
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      {%endif%}
+        
+    </body>
+</html>

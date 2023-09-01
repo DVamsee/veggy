@@ -1,0 +1,11 @@
+modules required before running the software;
+install the following software using pip
+django
+pandas
+geopy 
+psycopg2
+pillow
+
+
+flowbite (should be installed through npm)
+tailwind

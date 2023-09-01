@@ -1,0 +1,126 @@
+{% load static tailwind_tags %}
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% tailwind_css %}
+</head>
+<body class ='bg-no-repeat bg-cover bg-center bg-fixed' style="background-image: url('{% static 'pexels-login.jpg' %}')"> 
+  {% get_current_language as LANGUAGE_CODE %}
+  {% get_available_languages as Languages %}
+  {% get_language_info_list for Languages as langs %}
+      <!-- component -->
+      <div class="p-6 backdrop-blur bg-white/80 flex items-center justify-center">
+        <div class="container max-w-screen-lg mx-auto">
+          <div>
+            <a href="/{{LANGUAGE_CODE}}/profile/" class='inline-block px-6 py-2 border-2 border-red-600 text-red-600 font-medium text-xs leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out'>
+              {% translate "Back" %}
+            </a>
+            <h2 class="mt-2 font-semibold text-xl text-gray-900 md:text-3xl">{%translate "Edit Profile" %}</h2>
+            
+            <form action="/{{LANGUAGE_CODE}}/profile/edit_profile/" method ='post'>
+              {%csrf_token%}
+            <div class="bg-white mt-4 rounded shadow-lg p-4 px-4 md:p-8 mb-6">
+              <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
+                <div class="text-gray-600">
+                  <p class="font-medium text-lg">{% translate "Edit Personal Details" %}</p>
+                 
+                </div>
+
+                <div class="lg:col-span-2">
+                  <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
+                    <div class="md:col-span-3">
+                      <label for="full_name">{% translate "First Name" %}</label>
+                      <input type="text" name="first_name" id="first_name" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{request.user.first_name}}" placeholder="{{request.user.first_name}}">
+                    </div>
+                    <div class="md:col-span-2">
+                      <label for="full_name">{% translate "Last Name" %}</label>
+                      <input type="text" name="last_name" id="last_name" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{request.user.last_name}}" placeholder="{{request.user.last_name}}">
+                    </div>
+
+                    <div class="md:col-span-5">
+                      <label for="email">{% translate "Email Address" %}</label>
+                      <input type="text" name="email" id="email" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{request.user.email}}" placeholder="{{request.user.email}}" >
+                    </div>
+
+                    <div class="md:col-span-2">
+                      <label for="mobile">{% translate "Mobile number" %}</label>
+                      <input type="text" name="mobile" id="mobile" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{userd.mobile}}" placeholder="{{userd.mobile}}">
+                    </div>
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!--location details -->
+            <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
+              <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
+                <div class="text-gray-600">
+                  <p class="font-medium text-lg">{% translate "Edit Location Details" %}</p>
+                  
+                </div>
+
+                <div class="lg:col-span-2">
+                  <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
+                    <div class="md:col-span-2">
+                      <label for="village">{% translate "Village" %}</label>
+                      <input type="text" name="village" id="village" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{userd.village}}" placeholder="{{userd.village}}" >
+                    </div>
+                    <div class="md:col-span-3">
+                      <label for="mandal">{% translate "Mandal" %}</label>
+                      <input type="text" name="mandal" id="mandal" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{userd.mandal}}" placeholder="{{userd.mandal}}">
+                    </div>
+                    <div class="md:col-span-2">
+                      <label for="city">{% translate "City" %}</label>
+                      <input type="text" name="city" id="city" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{userd.city}}" placeholder="{{userd.city}}">
+                    </div>
+                    <div class="md:col-span-3">
+                      <label for="district">{% translate "District" %}</label>
+                      <input type="text" name="district" id="district" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{userd.district}}" placeholder="{{userd.district}}">
+                    </div>
+
+                    <div class="md:col-span-2">
+                      <label for="country">{% translate "Country / region" %}</label>
+                      <div class="h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
+                        <input name="country" id="country" class="px-4 appearance-none outline-none text-gray-800 w-full bg-transparent" value="{{userd.country}}" placeholder="{{userd.country}}">
+                        
+                        
+                      </div>
+                    </div>
+
+                    <div class="md:col-span-2">
+                      <label for="state">{% translate "State / province" %}</label>
+                      <div class="h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
+                        <input name="state" id="state" class="px-4 appearance-none outline-none text-gray-800 w-full bg-transparent" value="{{userd.state}}" placeholder="{{userd.state}}">
+                        
+                      </div>
+                    </div>
+
+                    <div class="md:col-span-1">
+                      <label for="zipcode">{% translate "Pincode" %}</label>
+                      <input type="text" name="pincode" id="zipcode" class="transition-all flex items-center h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{userd.pin}}" placeholder="{{userd.pin}}">
+                    </div>
+                    
+            
+                    <div class="md:col-span-5 text-right">
+                      <div class="inline-flex items-end">
+                        <input type='submit' class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" value="{% translate 'Submit' %}">
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </form>
+            
+
+          </div>
+        </div>
+      </div>
+
+</body>
+</html>

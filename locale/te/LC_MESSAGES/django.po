@@ -1,0 +1,530 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-02-03 17:18+0530\n"
+"PO-Revision-Date: 2023-02-03 16:50+0000\n"
+"Last-Translator:   <vamseed123@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Translated-Using: django-rosetta 0.9.8\n"
+
+#: .\core\settings.py:121
+msgid "English"
+msgstr "ఆంగ్ల"
+
+#: .\core\settings.py:122
+msgid "Telugu"
+msgstr "తెలుగు"
+
+#: .\templates\home.html:7 .\templates\products.html:7
+#, fuzzy
+#| msgid "Telugu"
+
+msgid "te"
+msgstr "తె"
+
+msgid "telugu"
+msgstr "తెలుగు"
+
+#: .\templates\home.html:18 .\templates\home.html:19
+#: .\templates\products.html:18
+msgid "hello"
+msgstr "నమస్కారం"
+
+#: .\templates\products.html:19
+msgid "products"
+msgstr "ఉత్పత్తులు"
+
+#: .\templates\products.html:20
+msgid "vamsee"
+msgstr "వంశీ"
+
+#: .\templates\products.html:22
+msgid "gokul"
+msgstr "గోకుల్"
+
+msgid "project"
+msgstr "ప్రాజెక్ట్"
+
+msgid "Home"								
+msgstr "హోమ్"
+
+msgid "Sell"
+msgstr "అమ్ము"
+
+msgid "About"
+msgstr "గురించి"
+
+msgid "Contact Us"
+msgstr "మమ్మల్ని సంప్రదించండి"
+
+msgid "Profile"
+msgstr "ప్రొఫైల్"
+
+msgid "log out"								
+msgstr "లాగ్ అవుట్"
+
+msgid "Log In"
+msgstr "లాగిన్"
+
+msgid "Sign Up"
+msgstr "సైన్ అప్"
+
+msgid "Farmer"
+msgstr "రైతు"
+
+
+msgid "All farmers"
+msgstr "రైతులందరూ"
+
+msgid "product"							
+msgstr "ఉత్పత్తి"
+
+msgid "All Products "							
+msgstr "అన్ని ఉత్పత్తులు"
+
+msgid "Products"							
+msgstr "ఉత్పత్తులు"
+
+msgid "distance"							
+msgstr "దూరం"
+
+msgid "All distances"							
+msgstr "అన్ని దూరాలు"
+
+msgid "under 5km"							
+msgstr "5 కిమీ లోపు"
+
+msgid "under 10km"						
+msgstr "10 కిమీ లోపు"
+
+msgid "under 15km"						
+msgstr "15 కిమీ లోపు"
+
+msgid "under 30km"						
+msgstr "30 కిమీ లోపు"
+
+msgid "filter"
+msgstr "ఫిల్టర్"
+
+msgid "order"
+msgstr "ఆర్డర్"
+
+msgid "veggy"
+msgstr "వెజ్జీ"
+
+msgid "orders"
+msgstr "ఆర్డర్లు"
+
+msgid "Add Product"
+msgstr "ఉత్పత్తిని జోడించండి"
+
+msgid "Product Name"
+msgstr "ఉత్పత్తి పేరు"
+
+msgid "Available Quantity"
+msgstr "పరిమాణం"
+
+msgid "Price"
+msgstr "ధర"
+
+msgid "Date"
+msgstr "తేదీ"
+
+msgid "Action"
+msgstr "చర్య"
+
+msgid "You haven't started selling."
+msgstr "మీరు అమ్మడం ప్రారంభించలేదు."
+
+msgid "Ordered Person"
+msgstr "కస్టమర్ పేరు"
+
+msgid "Quantity"
+msgstr "పరిమాణం"
+
+msgid "Mobile"
+msgstr "మొబైల్"
+
+msgid "Total price"
+msgstr "మొత్తం విలువ"
+
+msgid "Status"
+msgstr "స్టెటస్"
+
+msgid "You have no orders for now"
+msgstr "మీకు ప్రస్తుతానికి ఆర్డర్‌లు లేవు"
+
+msgid "Cancel"
+msgstr "క్యాన్సల్"
+
+msgid "Remove"
+msgstr "తొలగించు"
+
+msgid "Change price"
+msgstr "ధర మార్పు"
+
+msgid "Price change"
+msgstr "ధర మార్పు"
+
+msgid "select product"
+msgstr "ఉత్పత్తిని ఎంచుకోండి"
+
+msgid "New Price"
+msgstr "ధర"
+
+msgid "change price"
+msgstr "సేవ్"
+
+msgid "Market Price"
+msgstr "మార్కెట్ ధర"
+
+msgid "Retail Price(per kg)"
+msgstr "రిటైల్ ధర (కిలోకి)"
+
+msgid "Market Price(per kg)"
+msgstr "మార్కెట్ ధర (కేజీకి)"
+
+msgid "new price"
+msgstr "కొత్త ధర"
+
+msgid "Email"
+msgstr "ఇమెయిల్"
+
+msgid "Address"
+msgstr "చిరునామా"
+
+msgid "Edit Profile"
+msgstr "ప్రొఫైల్‌ని సవరించండి"
+
+msgid "My Profile"
+msgstr "నా ప్రొఫైల్"
+
+msgid "QR code"
+msgstr "QR కోడ్"
+
+msgid "Seller"
+msgstr "విక్రేత"
+
+msgid "You haven't ordered anything. Order something from here."
+msgstr "మీరు ఏమీ ఆర్డర్ చేయలేదు. ఇక్కడ నుండి ఏదైనా ఆర్డర్ చేయండి."
+
+msgid "You can download the Login QR by clicking the download button below"
+msgstr "డౌన్‌లోడ్ బటన్‌ను క్లిక్ చేయడం ద్వారా మీరు లాగిన్ QRని డౌన్‌లోడ్ చేసుకోవచ్చు"
+
+msgid "download"
+msgstr "డౌన్‌లోడ్"
+
+msgid "Amla"
+msgstr "ఉసిరి"
+
+msgid "Ash gourd" 
+msgstr "బూడిద పొట్లకాయ"
+
+msgid "Baby corn" 
+msgstr "బేబీ కార్న్"
+
+msgid "Banana flower" 
+msgstr "అరటి పువ్వు"
+
+msgid "Beetroot" 
+msgstr "బీట్రూట్"
+
+msgid "Bell Pepper (Capsicum)"
+msgstr "క్యాప్సికమ్"
+
+msgid "Capsicum" 
+msgstr "క్యాప్సికమ్"
+
+msgid "Bitter gourd" 
+msgstr "కాకరకాయ"
+
+msgid "Bottle gourd" 
+msgstr "సీసా పొట్లకాయ"
+
+msgid "Butter beans" 
+msgstr "వెన్న బీన్స్"
+
+msgid "Board beans" 
+msgstr "విస్తృత బీన్స్"
+
+msgid "Cabbage" 
+msgstr "క్యాబేజీ"
+
+msgid "Carrot" 
+msgstr "కారెట్"
+
+msgid "Cauliflower" 
+msgstr "కాలీఫ్లవర్"
+
+msgid "Cluster beans" 
+msgstr "క్లస్టర్ బీన్స్"
+
+msgid "Coconut" 
+msgstr "కొబ్బరి"
+
+msgid "Colocasia leaves" 
+msgstr "కోలోకాసియా ఆకులు"
+
+msgid "Colocasia roots" 
+msgstr "కోలోకాసియా మూలాలు"
+
+msgid "Cilantro" 
+msgstr "కొత్తిమీర"
+
+msgid "Corn" 
+msgstr "మొక్కజొన్న"
+
+msgid "Cucumber" 
+msgstr "దోసకాయ"
+
+msgid "Curry leaves" 
+msgstr "కరివేపాకు"
+
+msgid "Dill leaves" 
+msgstr "మెంతులు ఆకులు"
+
+msgid "Drumsticks" 
+msgstr "మునగకాయలు"
+
+msgid "Drinjal" 
+msgstr "వంకాయ"
+
+msgid "Elephant yam" 
+msgstr "ఏనుగు యం"
+
+msgid "fenugreek leave" 
+msgstr "మెంతి ఆకులు"
+
+msgid "French beans" 
+msgstr "ఫ్రెంచ్ బీన్స్"
+
+msgid "Garlic" 
+msgstr "వెల్లుల్లి"
+
+msgid "Ginger" 
+msgstr "అల్లం"
+
+msgid "Green chili" 
+msgstr "పచ్చి మిరపకాయ"
+
+msgid "Green onion" 
+msgstr "ఆకుపచ్చ ఉల్లిపాయ"
+
+msgid "Green peas" 
+msgstr "ఆకుపచ్చ బటానీలు"
+
+msgid "Ivy gourd" 
+msgstr "ఐవీ పొట్లకాయ"
+
+msgid "Lemon" 
+msgstr "నిమ్మకాయ"
+
+msgid "Mango" 
+msgstr "మామిడి"
+
+msgid "Mint leaves" 
+msgstr "పుదీనా ఆకులు"
+
+msgid "Mushroom" 
+msgstr "పుట్టగొడుగు"
+
+msgid "Mustard leaves" 
+msgstr "ఆవాలు"
+
+msgid "Okra"
+msgstr "బెండకాయ"
+
+msgid "Onion big" 
+msgstr "ఉల్లిపాయ పెద్ద"
+
+msgid "Onion small" 
+msgstr "ఉల్లిపాయ చిన్న"
+
+msgid "Plantain" 
+msgstr "అరటి"
+
+msgid "Potato" 
+msgstr "బంగాళదుంప"
+
+msgid "Pumpkin" 
+msgstr "గుమ్మడికాయ"
+
+msgid "Radish" 
+msgstr "ముల్లంగి"
+
+msgid "Ridge gourd" 
+msgstr "పొట్లకాయ"
+
+msgid "Shallot" 
+msgstr "సల్లట్"
+
+msgid "Snake gourd" 
+msgstr "పాము పొట్లకాయ"
+
+msgid "Sorrel leaves" 
+msgstr "సోరెల్ ఆకులు"
+
+msgid "Spinach" 
+msgstr "పాలకూర"
+
+msgid "Sweet potato" 
+msgstr "చిలగడదుంప"
+
+msgid "Tomato" 
+msgstr "టమోటా"
+
+msgid "Apple Washington" 
+msgstr "ఆపిల్ వాషింగ్టన్"
+
+msgid "Apple simla" 
+msgstr "ఆపిల్ సిమ్లా"
+
+msgid "Apple green" 
+msgstr "ఆపిల్ ఆకుపచ్చ"
+
+msgid "Apricot" 
+msgstr "నేరేడు పండు"
+
+msgid "Avocado" 
+msgstr "అవకాడో"
+
+msgid "Banana Morris" 
+msgstr "అరటిపండు మోరిస్"
+
+msgid "Banana regular" 
+msgstr "అరటి రెగ్యులర్"
+
+ msgid "Musk melon" 
+msgstr "కర్బూజ"
+
+msgid "Custard apple" 
+msgstr "సీతాఫలం"
+
+msgid "Gooseberry" 
+msgstr "జామకాయ"
+
+msgid "Grapes (black)" 
+msgstr "ద్రాక్ష నలుపు"
+
+msgid "Grapes (green)" 
+msgstr "ద్రాక్ష ఆకుపచ్చ"
+
+msgid "Guava" 
+msgstr "జామపండు"
+
+msgid "Jackfruit" 
+msgstr "పనసపండు"
+
+msgid "Lychee" 
+msgstr "లీచీ"
+
+msgid "Mango, ripe" 
+msgstr "మామిడి పండు"
+
+msgid "Mango, unripe" 
+msgstr "మామిడి కాయ"
+
+msgid "Orange" 
+msgstr "నారింజ"
+
+msgid "Papaya" 
+msgstr "బొప్పాయి"
+
+msgid "Pears" 
+msgstr "బేరి"
+
+msgid "Pineapple" 
+msgstr "అనాస పండు"
+
+msgid "Pomegranate" 
+msgstr "దానిమ్మ"
+
+msgid "Sapota" 
+msgstr "సోపాట"
+
+msgid "Sugar cane" 
+msgstr "చెరుకుగడ"
+
+msgid "Sweet lime" 
+msgstr "తీపి సున్నం"
+
+msgid "Watermelon" 
+msgstr "పుచ్చకాయ"
+
+msgid "Back"
+msgstr "వెనక్కి"
+
+msgid "Add product"
+msgstr "కొత్త ఉత్పత్తి"
+
+msgid "you can either upload an image of the product or a default image will be alloted for your product"
+msgstr "మీరు ఉత్పత్తి యొక్క చిత్రాన్ని అప్‌లోడ్ చేయవచ్చు లేదా మీ ఉత్పత్తి కోసం డిఫాల్ట్ చిత్రం కేటాయించబడుతుంది"
+
+msgid "Price(₹)"
+msgstr "ధర(₹)"
+
+msgid "Quantity(kg)"
+msgstr "పరిమాణం (కేజీకి)"
+
+msgid "Upload picture"
+msgstr "చిత్రాన్ని అప్‌లోడ్ చేయండి"
+
+msgid "Submit"
+msgstr "సమర్పించండి"
+
+msgid "Edit Personal Details"
+msgstr "వ్యక్తిగత వివరాలు"
+
+msgid "First Name"
+msgstr "మొదటి పేరు"
+
+msgid "Last Name"
+msgstr "ఇంటి పేరు"
+
+msgid "Email Address"
+msgstr "ఇమెయిల్"
+
+msgid "Mobile number"
+msgstr "మొబైల్ నంబర్"
+
+msgid "Edit Location Details"
+msgstr "స్థాన వివరాలను సవరించండి"
+
+msgid "Village"
+msgstr "గ్రామం"
+
+msgid "Mandal"
+msgstr "మండలం"
+
+msgid "City"
+msgstr "నగరం"
+
+msgid "District"
+msgstr "జిల్లా"
+
+msgid "Country / region"
+msgstr "దేశం"
+
+msgid "State / province"
+msgstr "రాష్ట్రం"
+
+msgid "Pincode"
+msgstr "పిన్ కోడ్"
+
+msgid "market price"
+msgstr "మార్కెట్ విలువ"
+
+msgid "Filter"
+msgstr "ఫిల్టర్"

@@ -1,0 +1,42 @@
+{% load static tailwind_tags %}
+{% load static %}
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% tailwind_css %}
+    <title>HTML Full-screen iframe (100% Height and Width)</title>
+  <style>
+      body{
+          margin: 0; /* Remove default margin */
+      }
+      iframe{      
+          display: block;  /* iframes are inline by default */   
+          height: 100vh;  /* Set height to 100% of the viewport height */   
+          width: 100vw;  /* Set width to 100% of the viewport width */     
+          border: none; /* Remove default border */
+          
+      }
+  </style>
+
+<body > 
+  
+  </div>
+  <section class="bg-black container px-4 py-10 mx-auto lg:h-128 lg:space-x-8 lg:flex lg:items-center">
+    <div class="w-full ">
+        <h1 class="text-3xl leading-snug text-white md:text-4xl">
+            A <span class="font-semibold">free repository</span> for community  <br class="hidden lg:block"> components using <span class="font-semibold underline decoration-primary">Tailwind CSS</span>
+        </h1>
+
+        <p class="mt-4 text-lg text-white">Open source Tailwind UI components and templates to <br class="hidden lg:block"> bootstrap your new apps, projects or landing sites!</p>
+
+    </div>  
+
+    <div class="mx-auto mt-4 ">
+      <iframe class='object-contain' src='https://my.spline.design/daftpunkcopy-4c02417ece3d8a38dbc0168b26ce4efb/' ></iframe>
+    </div>
+</section>
+
+
+</body>
+</html>

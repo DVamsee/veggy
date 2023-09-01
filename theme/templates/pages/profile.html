@@ -1,0 +1,564 @@
+{% load static tailwind_tags %}
+{% load static %}
+{% load i18n %}
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {% tailwind_css %} 
+    </head>
+    <body class ='bg-no-repeat bg-cover bg-center bg-fixed bg-slate-100 '>
+      {% get_current_language as LANGUAGE_CODE %}
+      {% get_available_languages as Languages %}
+      {% get_language_info_list for Languages as langs %}
+      <nav class="backdrop-blur bg-white/40 shadow-lg">
+        <div class="max-w-6xl mx-auto px-4">
+          <div class="flex justify-between">
+            <div class="flex space-x-7">
+              <div>
+                <!-- Website Logo -->
+                <a href="/{{LANGUAGE_CODE}}/" class="flex  mr-4 items-center py-4 px-2">
+                  <img src={% static 'logo.jpg'%} alt="Logo" class="h-8 w-8 mr-2">
+                  <span class="font-bold text-black text-xl">{%translate 'veggy' %}</span>
+                </a>
+              </div>
+              <!-- Primary Navbar items -->
+              <div class="hidden md:flex items-center space-x-1">
+                <a href="/{{LANGUAGE_CODE}}/" class="py-4 px-2 text-green-500 border-b-4 capitalize border-green-500 font-semibold ">{%translate 'Home' %}</a>
+                <a href="/{{LANGUAGE_CODE}}/sell/" class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">{%translate 'Sell' %}</a>
+                <a href="" class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">{%translate 'About' %}</a>
+                
+              </div>
+            </div>
+            <!-- Secondary Navbar items -->
+            <div class="hidden md:flex items-center space-x-3 ">
+              {%if user.is_authenticated %}
+              
+              
+              <a href="/accounts/logout/" class="py-2 px-2 font-medium text-white bg-green-500 rounded hover:bg-green-400 transition duration-300">{%translate 'log out' %}</a>
+              
+              {%endif%}
+              
+              {% for lang in langs%}
+              {% if LANGUAGE_CODE == lang.code %}
+              <a class="border-b-4 border-green-500" href="/{{lang.code}}/profile/" >{{lang.name_local}}</a>
+              {%else%}
+              <a class="" href="/{{lang.code}}/profile/" >{{lang.name_local}}</a>
+              {%endif%}
+              {% endfor %}
+
+            </div>
+            <!-- Mobile menu button -->
+            <div class="md:hidden flex items-center">
+              {% for lang in langs%}
+              {% if LANGUAGE_CODE == lang.code %}
+              <a class="mx-1 px-2 py-1 rounded-lg bg-green-500 text-white" href="/{{lang.code}}/profile/" >{% translate lang.name_local %}</a>
+              {%else%}
+              <a class="mx-2" href="/{{lang.code}}/profile/" >{% translate lang.name_local %}</a>
+              {%endif%}
+              {% endfor %}
+              <button class="outline-none mobile-menu-button">
+              <svg class=" w-6 h-6 text-gray-500 hover:text-green-500 "
+                x-show="!showMenu"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path d="M4 6h16M4 12h16M4 18h16"></path>
+              </svg>
+            </button>
+            </div>
+          </div>
+        </div>
+        <!-- mobile menu -->
+        <div class="hidden mobile-menu">
+          <ul class="">
+            {% if user.is_authenticated%}
+            
+            {%endif%}
+            <li class="active"><a href="/{{LANGUAGE_CODE}}" class="block text-sm px-2 py-4 text-white bg-green-500 font-semibold">Home</a></li>
+            <li><a href="/{{LANGUAGE_CODE}}/sell/" class="block text-sm px-2 py-4 hover:bg-green-500 transition duration-300">Sell</a></li>
+            <li><a href="/{{LANGUAGE_CODE}}/" class="block text-sm px-2 py-4 hover:bg-green-500 transition duration-300">About</a></li>
+            
+            {%if user.is_authenticated %}
+              
+              <li><a href="/{{LANGUAGE_CODE}}/accounts/logout/" class="block text-sm px-2 py-4 hover:bg-green-500 transition duration-300">log out</a></li>
+              
+              {%endif%}
+          </ul>
+        </div>
+        <script>
+          const btn = document.querySelector("button.mobile-menu-button");
+          const menu = document.querySelector(".mobile-menu");
+    
+          btn.addEventListener("click", () => {
+            menu.classList.toggle("hidden");
+          });
+        </script>
+      </nav>
+      
+
+      <div class="hidden md:flex py-4 px-4">
+        <div class="border-solid border-slate-100 bg-white container rounded-lg shadow-lg mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="px-4 py-4 col-span-1 sm:col-span-1 lg:col-span-1">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">{%translate 'My Profile' %}</h2>
+            <div class="mt-6">
+              <div class="text-gray-600 capitalize text-sm font-semibold mb-2">{%translate 'name' %}:</div>
+              <div class="text-gray-900 font-bold capitalize text-lg">{{request.user.first_name}} {{request.user.last_name}}</div>
+            </div> 
+            <div class="mt-4">
+              <div class="text-gray-600 text-sm font-semibold mb-2">{%translate 'Mobile' %}:</div>
+              <div class="text-gray-900 font-bold text-lg">{{userd.mobile}}</div>
+            </div>
+        
+            <div class="mt-4">
+              <div class="text-gray-600 text-sm font-semibold mb-2">{%translate 'Email' %}:</div>
+              <div class="text-gray-900 font-bold text-lg">{{request.user.email}}</div>
+            </div>
+            
+            
+            <div class="mt-4">
+              <div class="text-gray-600 text-sm font-semibold mb-2">{%translate 'Address' %}:</div>
+              <div class="text-gray-900 capitalize font-bold text-lg">{{userd.village}} ,{{userd.mandal}} ,{{userd.state}} ,{{userd.pin}}</div>
+            </div>
+          
+            <div class="mt-6">
+              <a href="/{{LANGUAGE_CODE}}/profile/edit_profile/" class="mt-3 py-2 px-2 capitalize shadow-md font-medium text-white bg-green-500 rounded hover:bg-green-400 transition duration-300">
+                {%translate 'Edit Profile' %}
+              </a>
+            </div>
+          </div>
+          <div class="px-4 py-4 bg-gray-100 rounded-lg  col-span- sm:col-span-1 lg:col-span-3">
+            <!-- HTML -->
+              <nav class="tabs-container">
+                <div class="inline-flex rounded-md shadow-sm">
+                  {%if type == 'orders'%}
+                  <a href="/profile/orders/" class="
+                    tab-link
+                    inline-flex items-center
+                    px-4 py-2
+                    font-bold text-lg leading-tight
+                    uppercase
+                    border-b-4 border-green-500
+                    hover:border-transparent hover:bg-gray-100
+                    focus:outline-none focus:border-transparent
+                    active:text-gray-800 active:border-gray-300
+                    transition duration-150 ease-in-out
+                  " id="tabs-home-tab" role="tab" aria-controls="tabs-home" aria-selected="true">
+                  {%translate 'orders' %}
+                  </a>
+                  {%else%}
+                  <a href="/{{LANGUAGE_CODE}}/profile/orders/" class="
+                    tab-link
+                    inline-flex items-center
+                    px-4 py-2
+                    border-b-2 border-transparent
+                    font-bold text-lg leading-tight
+                    uppercase
+                    hover:border-transparent hover:bg-gray-100
+                    focus:outline-none focus:border-transparent
+                    active:text-gray-800 active:border-gray-300
+                    transition duration-150 ease-in-out
+                  " id="tabs-home-tab" role="tab" aria-controls="tabs-home" aria-selected="true">
+                    {%translate 'orders' %} 
+                  </a>
+                  {%endif%}
+                  {%if type == 'qr'%}
+                  <a href="/profile/qr/" class="
+                    tab-link
+                    inline-flex items-center
+                    px-4 py-2
+                    border-b-4 border-green-500
+                    font-medium text-lg leading-tight
+                    uppercase
+                    hover:border-transparent hover:bg-gray-100
+                    focus:outline-none focus:border-transparent
+                    active:text-gray-800 active:border-gray-300
+                    transition duration-150 ease-in-out
+                  " id="tabs-profile-tab" role="tab" aria-controls="tabs-profile" aria-selected="false">
+                  {%translate 'QR code' %}
+                  </a>
+                  {%else%}
+                  <a href="/{{LANGUAGE_CODE}}/profile/qr/" class="
+                    tab-link
+                    inline-flex items-center
+                    px-4 py-2
+                    border-b-2 border-transparent
+                    font-medium text-lg leading-tight
+                    uppercase
+                    hover:border-transparent hover:bg-gray-100
+                    focus:outline-none focus:border-transparent
+                    active:text-gray-800 active:border-gray-300
+                    transition duration-150 ease-in-out
+                  " id="tabs-profile-tab" role="tab" aria-controls="tabs-profile" aria-selected="false">
+                    {%translate 'QR code' %}
+                  </a>
+                  {%endif%}
+                  <!--messages (chat box )-->
+                 
+                </div>
+              </nav><br>
+
+              {% if type == 'orders' %}
+                {%if orders%}
+                  <div class="mt-2 overflow-auto rounded-lg shadow hidden md:block">
+                  
+                  <table class="w-full">
+                    <thead class="bg-gray-50 border-b-2 border-gray-200">
+                    <tr>
+                      <th class="w-20 p-3 text-sm font-semibold tracking-wide text-left">{% translate 'Product Name' %} </th>
+                      <th class="w-20 p-3 text-sm font-semibold tracking-wide text-left">{% translate 'Available Quantity'%}</th>
+                      <th class="w-20 p-3 text-sm font-semibold tracking-wide text-left">{% translate 'Date' %}</th>
+                      <th class="w-24 p-3 text-sm font-semibold tracking-wide text-left">{%translate 'Seller' %}</th>
+                      <th class="w-20 p-3 text-sm font-semibold tracking-wide text-left">{% translate 'Mobile' %}</th>
+                      <th class="w-24 p-3 text-sm font-semibold tracking-wide text-left">{%translate 'Address' %}</th>
+                      <th class="w-20 p-3 text-sm font-semibold tracking-wide text-left">{% translate 'Price' %}</th>
+                      <th class="w-20 p-3 text-sm font-semibold tracking-wide text-left">{% translate 'Status' %}</th>
+                      <th class="w-20 p-3 text-sm font-semibold tracking-wide text-left">{% translate 'Action' %}</th>
+                    </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100">
+                  {% for order in orders %}
+                    <tr class="bg-white">
+                      <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
+                          {% translate order.product_id.product_name %}
+                      </td>
+                      <td class="p-3 text-sm text-gray-700 whitespace-nowrap">{{order.quantity}} kg</td>
+                      <td class="p-3 text-sm text-gray-700 whitespace-nowrap">{{order.date.date}}</td>
+                      <td class="p-3 text-sm text-gray-700 whitespace-nowrap">{{order.seller.user.first_name}}</td>
+                      <td class="p-3 text-sm text-gray-700 whitespace-nowrap">{{order.seller.mobile}}</td>
+
+                      <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
+                        {{order.seller.village}}, {{order.seller.mandal}}
+                      </td>
+                      <td class="p-3 text-sm text-gray-700 whitespace-nowrap">₹ {{order.price}}</td>
+                      <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
+                      <span
+                        class="p-1.5 text-xs font-medium uppercase tracking-wider text-green-800 bg-green-200 rounded-lg bg-opacity-50">{%translate order.status %}</span>
+                      </td>
+                      <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
+                        <a href="/profile/order/cancel/{{order.order_id}}"
+                        {%if order.status == 'delivered'%}
+                        <span
+                          class="p-1.5 text-xs font-medium uppercase tracking-wider text-red-800 bg-red-200 rounded-lg bg-opacity-50">{% translate 'Remove' %}</span>
+                        {%else%}
+                        <span
+                          class="p-1.5 text-xs font-medium uppercase tracking-wider text-red-800 bg-red-200 rounded-lg bg-opacity-50">{% translate 'Cancel' %}</span>
+                        {%endif%}
+                      </a>
+                      </td>
+                      
+                    </tr>
+                  {%endfor%}
+                    
+                    </tbody>
+                  </table>
+                </div>
+          
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:hidden">
+                  {% for order in orders %}
+                  <div class="bg-white space-y-3 p-4 rounded-lg shadow">
+                    <div class="flex items-center space-x-2 text-sm">
+                      <div class='text-lg font-medium text-black capitalize'>
+                        {% translate order.product_id.product_name %}
+                      </div>
+                      <div class="text-gray-500">{{order.quantity}} kg</div>
+                      <div>
+                        <span
+                          class="p-1.5 text-xs font-medium uppercase tracking-wider text-green-800 bg-green-200 rounded-lg bg-opacity-50">{%translate order.status %}</span>
+                      </div>
+                    </div>
+                    <div class='text-sm font-medium text-black capitalize'>
+                      {{order.seller.user.first_name}}
+                    </div>
+                    <div class='text-sm font-medium text-black capitalize'>
+                      {{order.seller.mobile}}
+                    </div>
+                    <div class="text-sm text-gray-700">
+                      {{order.seller.village}}, {{order.seller.mandal}}
+                    </div>
+                    <div class="text-sm font-medium text-black">
+                      ₹ {{order.price}}
+                    </div>
+                    <div>
+                      <a href='/profile/order/cancel/{{order.order_id}}'
+                      {%if order.status == 'delivered'%}
+                      <span
+                        class="p-1.5 text-xs font-medium uppercase tracking-wider text-red-800 bg-red-200 rounded-lg bg-opacity-50">{% translate 'Remove' %}</span>
+                      {%else%}
+                      <span
+                        class="p-1.5 text-xs font-medium uppercase tracking-wider text-red-800 bg-red-200 rounded-lg bg-opacity-50">{% translate 'Cancel' %}</span>
+                      {%endif%}
+                      </a>
+                    </div>
+                  </div>
+                  {%endfor%}
+                </div>
+              </div>
+              {%else%}
+                <h1 class='text-black text-sm font-semibold'>{%translate "You haven't ordered anything. Order something from here." %}</h1><br>
+                <a href="/{{LANGUAGE_CODE}}/" class=" mt-3 py-2 px-2 font-medium text-white bg-green-500 rounded hover:bg-green-400 transition duration-300">{%translate 'products' %}</a>
+              {%endif%}
+              {% endif %}
+
+
+              {%if type == 'qr'%}
+              <h1 class='text-black text-sm font-semibold'>{%translate "You can download the Login QR by clicking the download button below" %}.</h1><br>
+                
+                <a href="/profile/download/qr/" class=" mt-3 py-2 px-2 capitalize font-medium text-white bg-green-500 rounded hover:bg-green-400 transition duration-300">{%translate 'download' %}</a>
+                <!--<a href='/profile/send_mail/qr/'>send mail </a>-->
+                
+              {%endif%}
+            
+            
+            
+          </div>
+        </div>
+      </div>
+      
+
+
+      <!--mobile main page-->
+
+      <div class="md:hidden flex items-left">
+        <button class=" profile-filter-button mt-2 mx-2 py-2 px-4 text-lg capitalize font-medium text-white bg-green-500 rounded-lg shadow-lg hover:shadow-sm transition duration-300"> 
+          {%translate 'Profile'%}
+          
+      </button>
+      </div>
+      <div class="hidden profile-filter">
+        <div class=" py-4 px-4 md:hidden">
+          <div class="border-solid border-slate-100 bg-white container rounded-lg shadow-lg mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="px-4 py-4 col-span-1 sm:col-span-1 lg:col-span-1">
+              
+              <div class="mt-6">
+                <div class="text-gray-600 capitalize text-sm font-semibold mb-2">{%translate 'name' %}:</div>
+                <div class="text-gray-900 font-bold capitalize text-lg">{{request.user.first_name}} {{request.user.last_name}}</div>
+              </div> 
+              <div class="mt-4">
+                <div class="text-gray-600 text-sm font-semibold mb-2">{%translate 'Mobile' %}:</div>
+                <div class="text-gray-900 font-bold text-lg">{{userd.mobile}}</div>
+              </div>
+          
+              <div class="mt-4">
+                <div class="text-gray-600 text-sm font-semibold mb-2">{%translate 'Email' %}:</div>
+                <div class="text-gray-900 font-bold text-lg">{{request.user.email}}</div>
+              </div>
+              
+              
+              <div class="mt-4">
+                <div class="text-gray-600 text-sm font-semibold mb-2">{%translate 'Address' %}:</div>
+                <div class="text-gray-900 capitalize font-bold text-lg">{{userd.village}} ,{{userd.mandal}} ,{{userd.state}} ,{{userd.pin}}</div>
+              </div>
+            
+              <div class="mt-6">
+                <a href="/{{LANGUAGE_CODE}}/profile/edit_profile/" class="mt-3 py-2 px-2 capitalize shadow-md font-medium text-white bg-green-500 rounded hover:bg-green-400 transition duration-300">
+                  {%translate 'Edit Profile' %}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script>
+        const x = document.querySelector("button.profile-filter-button");
+        const y = document.querySelector(".profile-filter");
+  
+        x.addEventListener("click", () => {
+          y.classList.toggle("hidden");
+        });
+      </script>
+
+        <!--orders and qr -->
+        <div class = "mt-2 mx-4 md:hidden">
+          <div class="px-4 py-4 bg-white rounded-lg shadow-lg  col-span- sm:col-span-1 lg:col-span-3">
+            <!-- HTML -->
+              <nav class="tabs-container">
+                <div class="inline-flex rounded-md shadow-sm">
+                  {%if type == 'orders'%}
+                  <a href="/profile/orders/" class="
+                    tab-link
+                    inline-flex items-center
+                    px-4 py-2
+                    font-bold text-lg leading-tight
+                    uppercase
+                    border-b-4 border-green-500
+                    hover:border-transparent hover:bg-gray-100
+                    focus:outline-none focus:border-transparent
+                    active:text-gray-800 active:border-gray-300
+                    transition duration-150 ease-in-out
+                  " id="tabs-home-tab" role="tab" aria-controls="tabs-home" aria-selected="true">
+                  {%translate 'orders' %}
+                  </a>
+                  {%else%}
+                  <a href="/{{LANGUAGE_CODE}}/profile/orders/" class="
+                    tab-link
+                    inline-flex items-center
+                    px-4 py-2
+                    border-b-2 border-transparent
+                    font-bold text-lg leading-tight
+                    uppercase
+                    hover:border-transparent hover:bg-gray-100
+                    focus:outline-none focus:border-transparent
+                    active:text-gray-800 active:border-gray-300
+                    transition duration-150 ease-in-out
+                  " id="tabs-home-tab" role="tab" aria-controls="tabs-home" aria-selected="true">
+                    {%translate 'orders' %} 
+                  </a>
+                  {%endif%}
+                  {%if type == 'qr'%}
+                  <a href="/profile/qr/" class="
+                    tab-link
+                    inline-flex items-center
+                    px-4 py-2
+                    border-b-4 border-green-500
+                    font-medium text-lg leading-tight
+                    uppercase
+                    hover:border-transparent hover:bg-gray-100
+                    focus:outline-none focus:border-transparent
+                    active:text-gray-800 active:border-gray-300
+                    transition duration-150 ease-in-out
+                  " id="tabs-profile-tab" role="tab" aria-controls="tabs-profile" aria-selected="false">
+                  {%translate 'QR code' %}
+                  </a>
+                  {%else%}
+                  <a href="/{{LANGUAGE_CODE}}/profile/qr/" class="
+                    tab-link
+                    inline-flex items-center
+                    px-4 py-2
+                    border-b-2 border-transparent
+                    font-medium text-lg leading-tight
+                    uppercase
+                    hover:border-transparent hover:bg-gray-100
+                    focus:outline-none focus:border-transparent
+                    active:text-gray-800 active:border-gray-300
+                    transition duration-150 ease-in-out
+                  " id="tabs-profile-tab" role="tab" aria-controls="tabs-profile" aria-selected="false">
+                    {%translate 'QR code' %}
+                  </a>
+                  {%endif%}
+                  <!--messages (chat box )-->
+                 
+                </div>
+              </nav><br>
+
+              {% if type == 'orders' %}
+                {%if orders%}
+                  <div class="mt-2 overflow-auto rounded-lg shadow hidden md:block">
+                  
+                  <table class="w-full">
+                    <thead class="bg-gray-50 border-b-2 border-gray-200">
+                    <tr>
+                      <th class="w-20 p-3 text-sm font-semibold tracking-wide text-left">{% translate 'Product Name' %} </th>
+                      <th class="w-20 p-3 text-sm font-semibold tracking-wide text-left">{% translate 'Available Quantity'%}</th>
+                      <th class="w-20 p-3 text-sm font-semibold tracking-wide text-left">{% translate 'Date' %}</th>
+                      <th class="w-24 p-3 text-sm font-semibold tracking-wide text-left">{%translate 'Seller' %}</th>
+                      <th class="w-20 p-3 text-sm font-semibold tracking-wide text-left">{% translate 'Mobile' %}</th>
+                      <th class="w-24 p-3 text-sm font-semibold tracking-wide text-left">{%translate 'Address' %}</th>
+                      <th class="w-20 p-3 text-sm font-semibold tracking-wide text-left">{% translate 'Price' %}</th>
+                      <th class="w-20 p-3 text-sm font-semibold tracking-wide text-left">{% translate 'Status' %}</th>
+                      <th class="w-20 p-3 text-sm font-semibold tracking-wide text-left">{% translate 'Action' %}</th>
+                    </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100">
+                  {% for order in orders %}
+                    <tr class="bg-white">
+                      <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
+                          {% translate order.product_id.product_name %}
+                      </td>
+                      <td class="p-3 text-sm text-gray-700 whitespace-nowrap">{{order.quantity}} kg</td>
+                      <td class="p-3 text-sm text-gray-700 whitespace-nowrap">{{order.date.date}}</td>
+                      <td class="p-3 text-sm text-gray-700 whitespace-nowrap">{{order.seller.user.first_name}}</td>
+                      <td class="p-3 text-sm text-gray-700 whitespace-nowrap">{{order.seller.mobile}}</td>
+
+                      <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
+                        {{order.seller.village}}, {{order.seller.mandal}}
+                      </td>
+                      <td class="p-3 text-sm text-gray-700 whitespace-nowrap">₹ {{order.price}}</td>
+                      <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
+                      <span
+                        class="p-1.5 text-xs font-medium uppercase tracking-wider text-green-800 bg-green-200 rounded-lg bg-opacity-50">{%translate order.status %}</span>
+                      </td>
+                      <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
+                        <a href="/profile/order/cancel/{{order.order_id}}"
+                        {%if order.status == 'delivered'%}
+                        <span
+                          class="p-1.5 text-xs font-medium uppercase tracking-wider text-red-800 bg-red-200 rounded-lg bg-opacity-50">{% translate 'Remove' %}</span>
+                        {%else%}
+                        <span
+                          class="p-1.5 text-xs font-medium uppercase tracking-wider text-red-800 bg-red-200 rounded-lg bg-opacity-50">{% translate 'Cancel' %}</span>
+                        {%endif%}
+                      </a>
+                      </td>
+                      
+                    </tr>
+                  {%endfor%}
+                    
+                    </tbody>
+                  </table>
+                </div>
+          
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:hidden">
+                  {% for order in orders %}
+                  <div class="bg-white space-y-3 p-4 rounded-lg shadow">
+                    <div class="flex items-center space-x-2 text-sm">
+                      <div class='text-lg font-medium text-black capitalize'>
+                        {% translate order.product_id.product_name %}
+                      </div>
+                      <div class="text-gray-500">{{order.quantity}} kg</div>
+                      <div>
+                        <span
+                          class="p-1.5 text-xs font-medium uppercase tracking-wider text-green-800 bg-green-200 rounded-lg bg-opacity-50">{%translate order.status %}</span>
+                      </div>
+                    </div>
+                    <div class='text-sm font-medium text-black capitalize'>
+                      {{order.seller.user.first_name}}
+                    </div>
+                    <div class='text-sm font-medium text-black capitalize'>
+                      {{order.seller.mobile}}
+                    </div>
+                    <div class="text-sm text-gray-700">
+                      {{order.seller.village}}, {{order.seller.mandal}}
+                    </div>
+                    <div class="text-sm font-medium text-black">
+                      ₹ {{order.price}}
+                    </div>
+                    <div>
+                      <a href='/profile/order/cancel/{{order.order_id}}'
+                      {%if order.status == 'delivered'%}
+                      <span
+                        class="p-1.5 text-xs font-medium uppercase tracking-wider text-red-800 bg-red-200 rounded-lg bg-opacity-50">{% translate 'Remove' %}</span>
+                      {%else%}
+                      <span
+                        class="p-1.5 text-xs font-medium uppercase tracking-wider text-red-800 bg-red-200 rounded-lg bg-opacity-50">{% translate 'Cancel' %}</span>
+                      {%endif%}
+                      </a>
+                    </div>
+                  </div>
+                  {%endfor%}
+                </div>
+              </div>
+              {%else%}
+                <h1 class='text-black text-sm font-semibold'>{%translate "You haven't ordered anything. Order something from here." %}</h1><br>
+                <a href="/{{LANGUAGE_CODE}}/" class=" mt-3 py-2 px-2 font-medium text-white bg-green-500 rounded hover:bg-green-400 transition duration-300">{%translate 'products' %}</a>
+              {%endif%}
+              {% endif %}
+
+
+              {%if type == 'qr'%}
+              <h1 class='text-black text-sm font-semibold'>{%translate "You can download the Login QR by clicking the download button below" %}.</h1><br>
+                
+                <a href="/profile/download/qr/" class=" mt-3 py-2 px-2 capitalize font-medium text-white bg-green-500 rounded hover:bg-green-400 transition duration-300">{%translate 'download' %}</a>
+                <!--<a href='/profile/send_mail/qr/'>send mail </a>-->
+                
+              {%endif%}
+          </div>
+        </div>
+
+
+          
+    </body>
+</html>

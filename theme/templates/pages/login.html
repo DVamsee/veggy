@@ -1,0 +1,87 @@
+{% load static tailwind_tags %}
+{% load static %}
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% tailwind_css %}
+</head>
+<body class ='bg-no-repeat  bg-cover bg-center bg-fixed' > 
+    
+      <div class=" backdrop-blur bg-white/30  block p-6 rounded-lg shadow-lg  ">
+        <section class="h-full gradient-form md:h-screen">
+          <div class="container py-12 px-6 h-full">
+            <div class="flex justify-center items-center flex-wrap h-full g-6 text-gray-800">
+              <div class="xl:w-10/12">
+                <div class="block bg-white shadow-lg rounded-lg">
+                  <div class="lg:flex lg:flex-wrap g-0">
+                    <div class="lg:w-6/12 px-4 md:px-0">
+                      <div class="md:p-12 md:mx-6">
+                        <a class='text-lg' href="/">
+                          Home
+                        </a>
+                        <div class="text-center">
+                          <img
+                            class="mx-auto w-48"
+                            src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
+                            alt="logo"
+                          />
+                          <h3 class="text-xl font-semibold mt-1 mb-12 pb-1">Log in</h3>
+                        </div>
+                        <form method='post'>
+                          {% csrf_token %}
+                          <p class="mb-4">Please login to your account</p>
+                          <div class="mb-4">
+                            {{ form.as_p}}
+                            {%for i in  messages%}
+                                <p class='text-red-600'>{{i}}</p>
+                            {% endfor %}
+                          
+                          </div>
+                          <div class="text-center pt-1 mb-12 pb-1">
+                            <input
+                              class="bg-gradient-to-r from-green-100 to-green-800 inline-block px-6 py-2.5 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full mb-3"
+                              type="submit"
+                              data-mdb-ripple="true"
+                              data-mdb-ripple-color="light"
+                              value="Log in"
+                            >
+                            
+                            <a class="text-gray-500" href="/password-reset">Forgot password?</a>
+                          </div>
+                        </form>
+                          <div class="mt-4 flex items-center justify-between pb-6">
+                            <p class="mb-0 mr-2">Don't have an account?</p>
+                            <a
+                              type="button"
+                              class="inline-block px-6 py-2 border-2 border-green-600 text-green-600 font-medium text-xs leading-tight uppercase rounded hover:bg-green-600 hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
+                              data-mdb-ripple="true"
+                              data-mdb-ripple-color="light"
+                              href="/register"
+                            >
+                              Register
+                            </a>
+                          </div>
+                        
+                      </div>
+                    </div>
+                    <div class="bg-gradient-to-r from-green-100 to-green-800 lg:w-6/12 flex items-center lg:rounded-r-lg rounded-b-lg lg:rounded-bl-none">
+                      
+                      <div class="text-black px-4 py-6 md:p-12 md:mx-6">
+                        <h4 class="text-xl font-semibold mb-6">about login </h4>
+                        <p class="text-sm">
+                          Rules for login 
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      
+
+</body>
+</html>

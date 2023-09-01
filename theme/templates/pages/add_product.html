@@ -1,0 +1,117 @@
+{% load static tailwind_tags %}
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% tailwind_css %}
+</head>
+<body class ='bg-no-repeat bg-cover bg-center bg-fixed' style="background-image: url('{% static 'pexels-login.jpg'%}')"> 
+  {% get_current_language as LANGUAGE_CODE %}
+  {% get_available_languages as Languages %}
+  {% get_language_info_list for Languages as langs %}
+  <div class="p-6 h-full  backdrop-blur bg-white/80 flex items-center justify-center">
+    <div class="container max-w-screen-lg mx-auto">
+      <div>
+        <a href="/{{LANGUAGE_CODE}}/sell/" class='inline-block px-6 py-2 border-2 border-red-600 text-red-600 font-medium text-xs leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out'>
+          {% translate "Back" %}
+        </a>
+        <h2 class="mt-2 font-semibold text-xl text-gray-900 md:text-3xl">{% translate "Add product" %}</h2>
+        
+        <form action='/sell/addproduct/' method ='post' enctype="multipart/form-data">
+          {%csrf_token%}
+        <div class="bg-white mt-4 rounded shadow-lg p-4 px-4 md:p-8 mb-6">
+          <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
+            <div class="text-gray-600">
+              <p class="font-medium text-lg">{% translate "you can either upload an image of the product or a default image will be alloted for your product" %}</p>
+             
+            </div>
+
+            <div class="lg:col-span-2">
+              <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
+                <div class="md:col-span-3">
+                  <label class='text-lg font-semibold' for="product">{% translate "Product Name" %}</label>
+                  <select name='product_name' class="form-select appearance-none
+                          block
+                          w-full
+                          px-3
+                          py-1.5
+                          text-base
+                          font-normal
+                          text-gray-700
+                          bg-white bg-clip-padding bg-no-repeat
+                          border border-solid border-gray-300
+                          rounded
+                          transition
+                          ease-in-out
+                          m-0
+                          focus:text-gray-700 focus:bg-white focus:border-green-500 focus:outline-none">
+                            <option selected>{%translate  'products' %}</option>
+                            {%for product in products%}
+                            <option value="{{product}}">{% translate product %}</option>
+                            {%endfor%}
+                  </select>
+                </div>
+                
+
+                <div class="md:col-span-3">
+                  <label class='text-lg font-semibold' for="quantity">{% translate "Quantity(kg)" %}</label>
+                  <input type="number" name="quantity" id="quantity" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" >
+                </div>
+
+                <div class="md:col-span-3">
+                  <label class='text-lg font-semibold' for="price">{% translate "Price(₹)" %}</label>
+                  <input type="number" name="price" id="price" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"  >
+                </div>
+
+                <div class='md:col-span-3'>
+                  <label class='text-lg font-semibold' for="formFile" class="form-label inline-block mb-2 text-black">{% translate "Upload picture" %}</label>
+                  <input class="form-control
+                  block
+                  w-full
+                  px-3
+                  py-1.5
+                  text-base
+                  font-normal
+                  text-gray-700
+                  bg-white bg-clip-padding
+                  border border-solid border-gray-300
+                  rounded
+                  transition
+                  ease-in-out
+                  m-0
+                  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" accept="image/*" name='image' type="file" id="formFile">
+                </div>
+
+                <div class="md:col-span-5 text-right">
+                  <div class="inline-flex items-end">
+                    <input type='submit' class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" value="{% translate 'Submit' %}">
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+      
+      
+        </form>
+        
+
+      </div>
+    </div>
+  </div>
+  <script>
+    function updateName() {
+      // Get the value of the input field with id "name"
+      var name = document.getElementById("name").value;
+      document.getElementById("p_name").innerHTML = name;
+    }
+
+  </script>
+
+</body>
+</html>

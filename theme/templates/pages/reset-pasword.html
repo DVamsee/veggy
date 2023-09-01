@@ -1,0 +1,47 @@
+{% load static tailwind_tags %}
+{% load static %}
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% tailwind_css %}
+</head>
+<body class ='bg-no-repeat bg-cover bg-center bg-fixed' style="background-image: url('{% static 'pexels-login.jpg' %}')"> 
+    
+      <div class="mx-10 mt-20 backdrop-blur bg-white/30  block p-6 rounded-lg shadow-lg  ">
+        <div class=" md:p-12 md:mx-6">
+          
+          <div class="text-center text-xl">
+            <h3>Reset your password</h3>
+          </div>
+          <div class="mx-auto mt-4 w-1/2 bg-white block p-6 rounded-lg shadow-lg">
+          <form method='post'>
+            {% csrf_token %}
+            <div class="mt-4 mx-auto">
+              <div class="mx-2">
+                <h3 class="mb-4 text-md">Enter new password</h3>
+                
+                <div class="form-group mb-6">
+                  {{form.as_p}}
+                  
+                </div>
+              
+              <div class="mx-auto">
+              <input type="submit" class="bg-gradient-to-r from-green-100 to-green-800 inline-block px-6 py-2.5 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full mb-3"
+                     
+                      value ='Reset'>
+              
+              </div>
+          </form>
+          <div class="mt-4 flex items-center justify-between pb-6">
+            <p class="mb-0 mr-2"></p>
+            
+          </div>
+          </div>
+          </div>
+        </div>
+      </div>
+      
+
+</body>
+</html>

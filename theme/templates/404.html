@@ -1,0 +1,45 @@
+{% load static tailwind_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html :class="{ 'theme-dark': dark }" x-data="data()" lang="en">
+  <head>
+    {% tailwind_css %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>404</title>
+    <style>
+      body{
+          margin: 0; /* Remove default margin */
+      }
+      iframe{      
+          display: block;  /* iframes are inline by default */   
+          height: 100vh;  /* Set height to 100% of the viewport height */   
+          width: 100vw;  /* Set width to 100% of the viewport width */     
+          border: none; /* Remove default border */
+          
+      }
+  </style>
+
+  </head>
+  <body>
+    <main class="h-screen w-full flex flex-col justify-center items-center bg-[#1A2238]">
+      <button class="mt-5">
+        <a
+          class="relative inline-block text-sm font-medium text-[#FF6A3D] group active:text-orange-500 focus:outline-none focus:ring"
+          href='/'
+        >
+          <span
+            class="absolute inset-0 transition-transform translate-x-0.5 translate-y-0.5 bg-[#FF6A3D] group-hover:translate-y-0 group-hover:translate-x-0"
+          ></span>
+  
+          <span class="relative block px-8 py-3 bg-[#1A2238] border border-current">
+            Go Home
+          </span>
+        </a>
+      </button>
+      <iframe src='https://my.spline.design/3dtextcopy-f69d8c992cfb831dcf2c34ce54d7cf94/'></iframe>
+      
+    </main>
+  </body>
+</html>
